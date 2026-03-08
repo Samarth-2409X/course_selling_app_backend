@@ -1,20 +1,12 @@
 const express = require("express");
-const {createUserRoute} = requier("./user.js");
+const { createCourseRouting, courseRouter } = require("./routes/course.js");
+const { userRouter } = require("./routes/user.js");
+const {createUserRoute} = requier("./routes/user.js");
 
 const app = express();
 
-createUserRoute(app);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/course", courseRouter);
 
-app.post("course/purchse", (req, res) => {
-    res.json({
-        msg:"nothing"
-    })
-});
-
-app.get("course/preview", (req, res) => {
-    res.json({
-        msg:"nothing"
-    })
-});
 
 app.listen(3000);
