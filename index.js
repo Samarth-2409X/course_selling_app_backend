@@ -16,3 +16,5 @@ app.get("course/preview", (req, res) => {
         msg:"nothing"
     })
 });
+
+app.listen(3000);
