@@ -1,13 +1,13 @@
 const {Router} = require("express");
 const courseRouter = Router();
 
-	courseRouter.post("course/purchse", (req, res) => {
+	courseRouter.post("/purchse", (req, res) => {
         res.json({
             msg:"nothing"
         })
     });
 
-    courseRouter.get("course/preview", (req, res) => {
+    courseRouter.get("/preview", (req, res) => {
         res.json({
             msg:"nothing"
         })

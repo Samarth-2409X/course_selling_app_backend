@@ -1,7 +1,7 @@
 const express = require("express");
-const { createCourseRouting, courseRouter } = require("./routes/course.js");
+const { courseRouter } = require("./routes/course.js");
 const { userRouter } = require("./routes/user.js");
-const {createUserRoute} = requier("./routes/user.js");
+
 
 const app = express();
 

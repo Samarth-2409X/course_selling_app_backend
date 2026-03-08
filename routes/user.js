@@ -1,19 +1,19 @@
 const {Router} = require("express");
 const userRouter = Router();
 
-    userRouter.post("user/singup", (req, res) => {
+    userRouter.post("/singup", (req, res) => {
         res.json({
             msg:"nothing"
         })
     });
 
-    userRouter.post("user/signin", (req, res) => {
+    userRouter.post("/signin", (req, res) => {
         res.json({
             msg:"nothing"
         })
     });
 
-    userRouter.get("user/purchase", (req, res) =>{
+    userRouter.get("/purchase", (req, res) =>{
         res.json({
             msg:"nothing"
         })
