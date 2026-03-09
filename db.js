@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
-mongoose.connect("mongodb+srv://samarth:Samarth7777@cluster0.z0adlk5.mongodb.net/todoDB");
+console.log("connected to");
 
-const userSchema = ({
+
+const userSchema = new Schema({
     email:{type: String, unique: true},
     password: String,
     firstName: String,
     lastName: String
 })
 
-const adminSchema = ({
+const adminSchema = new Schema({
     email:{type: String, unique: true},
     password: String,
     firstName: String,
     lastName: String
 })
 
-const courseSchema = ({
+const courseSchema = new Schema({
     title: String,
     discription: String,
     price: Number,
@@ -25,15 +26,15 @@ const courseSchema = ({
     creatorId: ObjectId
 })
 
-const purchaseSchema = ({
+const purchaseSchema = new Schema({
     userId: ObjectId,
     courseId: ObjectId
 })
 
-const userModel = mongoose.Model("user", userSchema);
-const adminModel = mongoose.Model("admin", adminSchema);
-const courseModel = mongoose.Model("course", courseSchema);
-const purchaseModel = mongoose.Model("purchase", purchaseSchema);
+const userModel = mongoose.model("user", userSchema);
+const adminModel = mongoose.model("admin", adminSchema);
+const courseModel = mongoose.model("course", courseSchema);
+const purchaseModel = mongoose.model("purchase", purchaseSchema);
 
 module.exports = {
     userModel,
