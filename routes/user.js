@@ -1,13 +1,26 @@
 const {Router} = require("express");
 const userRouter = Router();
+const {userModel, purchaseModel, courseModel} = require("../db");
+const jwt = require("jsonwebtoken");
 
-    userRouter.post("/singup", (req, res) => {
+    userRouter.post("/singup", async(req, res) => {
+        const {email, password, firstname, lastname} = req.body;
+
+        await userModel.create({
+            email: email,
+            password: password,
+            firstName: firstname,
+            lastName: lastname
+        })
+
         res.json({
-            msg:"nothing"
+            msg:"signup suceeded"
         })
     });
 
-    userRouter.post("/signin", (req, res) => {
+    userRouter.post("/signin", async(req, res) => {
+
+        
         res.json({
             msg:"nothing"
         })
