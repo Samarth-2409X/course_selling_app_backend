@@ -3,9 +3,9 @@ const adminRouter = Router();
 const {adminModel, userModel, courseModel} = require("../db");
 const jwt = require("jsonwebtoken");
 const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD;
-const {adminMiddleware} = require("../middlewares");
+const {adminMiddleware} = require("../middlewares/admin");
  
-adminRouter.post("/signup", async(res, req) => {
+adminRouter.post("/signup", async(req, res) => {
     const {email, password, firstName, lastName} = req.body;
 
     await adminModel.create({
@@ -20,17 +20,17 @@ adminRouter.post("/signup", async(res, req) => {
     })
 })
 
-adminRouter.post("/signin", async(res, req) => {
+adminRouter.post("/signin", async(req, res) => {
     const {email, password} = req.body;
 
-    const admin = await userModel.findOne({
+    const admin = await adminModel.findOne({
         email,
         password
     })
 
     if(admin){
         const token = jwt.sign({
-            id:user._id,
+            id:admin._id,
         }, JWT_ADMIN_PASSWORD);
 
         res.json({
@@ -39,16 +39,18 @@ adminRouter.post("/signin", async(res, req) => {
     }
     else{
         res.status(403).json({
-            mgs:"Incorrect credentials"
+            msg:"Incorrect credentials"
         })
     }
 })
 
-adminRouter.post("/course", adminMiddleware, async(res, req) => {
+adminRouter.post("/course", adminMiddleware, async(req, res) => {
 
     adminId = req.userId;
 
-    await courseModel.create({
+    const {title, discription, imgurl, price} = req.body;
+
+    const course = await courseModel.create({
         title: title,
         discription: discription,
         imgurl: imgurl,
@@ -62,8 +64,8 @@ adminRouter.post("/course", adminMiddleware, async(res, req) => {
     })
 })
 
-adminRouter.put("/course",adminMiddleware, async (res, req) => {
-    adminId = req.userId;
+adminRouter.put("/course",adminMiddleware, async (req, res) => {
+    const adminId = req.userId;
 
     const {courseId, title, discription, imgurl, price} = req.body;
 
@@ -83,7 +85,7 @@ adminRouter.put("/course",adminMiddleware, async (res, req) => {
     })
 })
 
-adminRouter.get("/course/bulk", adminMiddleware, async(res, req) => {
+adminRouter.get("/course/bulk", adminMiddleware, async(req, res) => {
 
     adminId = req.userId;
 
