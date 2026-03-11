@@ -1,4 +1,3 @@
-# Course Selling Backend API 🚀
 # 🎓 Course Selling Application (Backend)
 
 A **Node.js backend API** for a course selling platform where **admins can create courses and users can purchase them**.
